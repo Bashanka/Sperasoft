@@ -1,4 +1,4 @@
-package basicsobjects;
+package objectsbasics;
 
 public class Position {
     private int x;
