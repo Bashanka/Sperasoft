@@ -3,6 +3,8 @@ package lambda;
 import collections.practice2.Person;
 
 import java.util.*;
+import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 public class Demo {
@@ -32,23 +34,23 @@ public class Demo {
         // Practice 2
         Author author1 = new Author("Michelle", "Obama");
         Author author2 = new Author("Craig", "Smith");
-        Author author3 = new Author("Joanna", "Gaines");
-        Author author4 = new Author("Jeff", "Kinney");
+        Author author3 = new Author("Michael", "Diamond");
+        Author author4 = new Author("John", "Grisham");
         List<Book> books = Arrays.asList(
                 new Book("Becoming", author1, 19.50),
                 new Book("The Wonky Donkey", author2, 5.20),
-                new Book("Homebody: A Guide to Creating Spaces You Never Want to Leave", author3, 20.43),
-                new Book("Magnolia Table: A Collection of Recipes for Gathering", author3, 13.73),
-                new Book("Diary of a Wimpy Kid Book 13", author4, 6.69)
+                new Book("Beastie Boys Book", author3, 22.92),
+                new Book("The Reckoning: A Novel", author4, 13.89),
+                new Book("The Rooster Bar", author4, 9.99)
+
         );
 
         Book maxPriceBook = books.stream().max(Comparator.comparingDouble(Book::getPrice)).get();
         System.out.println(maxPriceBook.bookDetails());
 
-        String booksTitles = books.stream()
-                .filter(book -> book.getAuthor() == author3)
-                .map(Book::getTitle)
-                .collect(Collectors.joining(" "));
+        Map<String, String> booksTitles = books.stream()
+                .collect(Collectors.groupingBy(Book::getAuthorFullName,
+                        Collectors.mapping(Book::getTitle, Collectors.joining(" || "))));
         System.out.println(booksTitles);
 
 
@@ -61,5 +63,4 @@ public class Demo {
         System.out.println(allCost);
 
     }
-
 }
