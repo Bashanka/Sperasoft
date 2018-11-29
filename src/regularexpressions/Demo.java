@@ -30,6 +30,22 @@ public class Demo {
         System.out.println(p4("45/15/2019")); //false
         System.out.println(p4("aa\\0\\9")); //false
         System.out.println();
+
+        // 5
+        System.out.println(p5("Regular regular popular expressions entered popular use from 1968 1968 1968"));
+        System.out.println();
+
+        // 6
+        System.out.println(p6("1223"));
+        System.out.println(p6("11223344"));
+        System.out.println(p6("1122333"));
+        System.out.println(p6("111111"));
+        System.out.println(p6("12e23"));
+        System.out.println();
+
+        // 7
+        System.out.println(p7("password wword word Heeeeeeello"));
+        System.out.println();
     }
 
     public static ArrayList p1(String text) {
@@ -65,7 +81,21 @@ public class Demo {
     }
 
     public static String p5(String s) {
-        return s;
+        Pattern pattern = Pattern.compile("(?i)\\b(\\w+)(?:\\s+\\1\\b)+");
+        Matcher matcher = pattern.matcher(s);
+        return matcher.replaceAll("$1");
+    }
+
+    public static String p6(String s) {
+        Pattern pattern = Pattern.compile("(\\d)\\1");
+        Matcher matcher = pattern.matcher(s);
+        return matcher.replaceAll("*");
+    }
+
+    public static String p7(String s) {
+        Pattern pattern = Pattern.compile("(?i)\\b\\w*(\\w)\\1\\w*\\b\\s*");
+        Matcher matcher = pattern.matcher(s);
+        return matcher.replaceAll("");
     }
 
 }
