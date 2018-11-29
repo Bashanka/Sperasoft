@@ -4,6 +4,7 @@ import collections.practice2.Person;
 
 import java.util.*;
 import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 public class Demo {
@@ -62,5 +63,4 @@ public class Demo {
         System.out.println(allCost);
 
     }
-
 }
