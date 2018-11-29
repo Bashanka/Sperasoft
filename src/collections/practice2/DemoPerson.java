@@ -1,7 +1,6 @@
 package collections.practice2;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 
 public class DemoPerson {
     public static void main(String[] args) {
@@ -40,19 +39,29 @@ public class DemoPerson {
         System.out.println(persons2);
 
         System.out.println("First Person List " + (compareArrays(persons1, persons2) ? "equals " : "does not equal ") + "Second Person List");
+
+
+        ArrayList<Person> persons3 = new ArrayList<>();
+        // without this line equals
+        persons3.add(new Person("Scoty", 17));
+        persons3.add(new Person("Scoty", 16));
+        persons3.add(new Person("Scoty", 16));
+        persons3.add(new Person("Scoty", 16));
+        persons3.add(new Person("Mary", 16));
+        persons3.add(new Person("Peter", 18));
+        persons3.add(new Person("Roman", 31));
+        System.out.println(removeDuplicates(persons3));
     }
 
     public static <T extends Comparable> ArrayList<T> removeDuplicates(ArrayList<T> arrayList) {
-        for (int i = 0; i < arrayList.size() - 1; i++)
-            for (int j = i + 1; j < arrayList.size(); j++)
-                if (arrayList.get(i).compareTo(arrayList.get(j)) != 0)
-                    arrayList.remove(j);
-        return arrayList;
+//        for (int i = 0; i < arrayList.size() - 1; i++)
+//            for (int j = i + 1; j < arrayList.size(); j++)
+//                if (arrayList.get(i).compareTo(arrayList.get(j)) != 0)
+//                    arrayList.remove(j);
+        return new ArrayList<>(new TreeSet<>(arrayList));
     }
 
     public static <T extends Comparable> boolean compareArrays(ArrayList<T> arr1, ArrayList<T> arr2) {
-        arr1 = removeDuplicates(arr1);
-        arr2 = removeDuplicates(arr2);
         if (arr1.size() != arr2.size()) return false;
         for (int i = 0; i < arr1.size(); i++) {
             boolean flag = false;
